@@ -9,34 +9,54 @@ export default ({data}) => {
   console.log(data);
   return (
     <PrimaryLayout column="col-xs-6">
-      {data.allMarkdownRemark.nodes.map((node) => (
-        <Post 
-          image={node.frontmatter.image}
-          title={node.frontmatter.title}
+    {
+      // data.allMarkdownRemark.nodes.map((node) => (
+      //   <Post 
+      //     image={node.frontmatter.image}
+      //     title={node.frontmatter.title}
+      //     excerpt={node.excerpt}
+      //     readMore={node.fields.slug}
+      //   />
+      // ))
+      data.allWordpressPost.nodes.map(node => (
+        <Post
+          image={node.jetpack_featured_media_url}
+          title={node.title}
           excerpt={node.excerpt}
-          readMore={node.fields.slug}
+          readMore={node.slug}
         />
-      ))}
+      ))
+    }
       
     </PrimaryLayout>
   )
 }
 
 export const query=graphql`
+# {
+#   allMarkdownRemark {
+#     nodes {
+#       frontmatter{
+#         title
+#         date
+#         keywords
+#         image
+#       }
+#       excerpt
+#       html
+#       fields {
+#         slug
+#       }
+#     }
+#   }
+# }
 {
-  allMarkdownRemark{
+  allWordpressPost {
     nodes {
-      frontmatter{
-        title
-        date
-        keywords
-        image
-      }
+      slug
+      title
       excerpt
-      html
-      fields {
-        slug
-      }
+      jetpack_featured_media_url
     }
   }
 }
