@@ -18,5 +18,10 @@ module.exports = {
       },
     },
     {resolve: `gatsby-transformer-remark`},
+    { resolve: `gatsby-source-wordpress`, options: {
+      baseUrl: `cerebrus.home.blog`,
+      protocol: `http`,
+      hostingWPCOM: true,
+    }}
   ],
 }
